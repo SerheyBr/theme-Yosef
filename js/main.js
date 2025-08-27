@@ -12,8 +12,13 @@ function toggleShowFullTextForPost(classNamePosts) {
 
     if (btn && fullText) {
       btn.addEventListener("click", (e) => {
-        fullText.classList.toggle("active");
+        // fullText.classList.toggle("active");
+        const isActive = fullText.classList.toggle("active");
         btn.classList.toggle("active");
+        // Если текст скрывается, скроллим к началу блока
+        if (!isActive) {
+          post.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       });
     }
   });
@@ -113,6 +118,26 @@ if (document.querySelector(".video-modal")) {
     }
   });
 }
+
+// при нажатие на первый элемент сайдбара на странице legal-practice откидываем скролл до начала страницы
+document.addEventListener("DOMContentLoaded", function () {
+  const menuLinks = document.querySelectorAll(
+    ".sidebar-legal-practice__list li a"
+  );
+
+  if (menuLinks.length > 0) {
+    // Первая ссылка — скролл наверх
+    menuLinks[0].addEventListener("click", function (e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+
+    // Остальные ссылки можно оставить стандартными, если они ведут к якорям
+  }
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   // Инициализация GSAP ScrollTrigger

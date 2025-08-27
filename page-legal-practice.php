@@ -47,7 +47,7 @@ get_header();
 
             <div class="legal-practice-post__text show-full-text text-WYSIWYG"><?php the_sub_field('lp-reapiter_full-text'); ?></div>
             <button class="legal-practice-post__btn button-show-more">
-            <p>קרא עוד</p>
+            <p dir='rtl'>סגור</p>
             <svg
                 width="12"
                 height="10"
@@ -71,9 +71,9 @@ get_header();
         </div>
         <div class="layout__sidebar">
         <div class="sidebar-legal-practice">
-            <h3 class="sidebar-legal-practice__title">
+            <!-- <h3 class="sidebar-legal-practice__title">
             עשייה משפטית - רשימת נושאים
-            </h3>
+            </h3> -->
             <div class="sidebar-legal-practice__list">
 <?php if( have_rows('lp-reapiter') ): ?>
     <?php $index = 0 ;?>
