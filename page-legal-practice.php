@@ -47,7 +47,8 @@ get_header();
 
             <div class="legal-practice-post__text show-full-text text-WYSIWYG"><?php the_sub_field('lp-reapiter_full-text'); ?></div>
             <button class="legal-practice-post__btn button-show-more">
-            <p dir='rtl'>סגור</p>
+            <p dir='rtl' class='btn-visible'>סגור</p>
+            <p dir='rtl' class='btn-hidden'>קרא עוד</p>
             <svg
                 width="12"
                 height="10"

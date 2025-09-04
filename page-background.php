@@ -11,15 +11,16 @@ get_header();
         <div class="layout__content">
         <div class="background">
             <img
-            src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/men.png"
+            src="<?php the_field('backgroundp_img'); ?>"
             alt="img"
             width="300"
             height="375"
             class="background__img"
             />
             <div class="background__body">
-            <h2 class="background__title title-section">רקע אישי</h2>
-            <p>
+            <h2 class="background__title title-section"><?php the_field('backgroundP_title'); ?></h2>
+            <div><?php the_field('backgroundp_text'); ?></div>
+            <!-- <p>
                 לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית הועניב
                 היושבב שערש שמחויט - שלושע ותלברו חשלו שעותלשך וחאית נובש
                 ערששף. זותה מנק הבקיץ אפאח דלאמת יבש, כאנה ניצאחו נמרגי שהכים
@@ -47,7 +48,7 @@ get_header();
                 סילקוף, מרגשי ומרגשח. עמחליף נולום ארווס סאפיאן - פוסיליס
                 קוויס, אקווזמן קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר,
                 בנפת נפקט למסון בלרק - וענוף קונסקטורר אדיפיסינג אלית.
-            </p>
+            </p> -->
             </div>
         </div>
         </div>

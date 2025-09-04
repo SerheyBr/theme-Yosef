@@ -34,10 +34,19 @@
   <div class="header__body">
     <div class="container">
       <div class="header__body-wrapper">
+
         <nav>
-          <ul>
-            <li>
-              <a href="index.html">דף בית</a>
+        <?php 
+          wp_nav_menu([
+              'theme_location' => 'header_menu',
+              'container'      => false,       
+              'menu_class'     => '', 
+              'fallback_cb'    => false,      
+          ]);
+        ?>
+          <!-- <ul>
+            <li class='active'>
+              <a href="index.html" >דף בית</a>
             </li>
             <li>
               <a href="<?php echo esc_url(get_permalink(9)); ?>">עשייה משפטית</a>
@@ -63,7 +72,7 @@
             <li>
               <a href="contacts.html">יצירת קשר</a>
             </li>
-          </ul>
+          </ul> -->
         </nav>
         <div class="header__search">
           <button class="header__search-btn">

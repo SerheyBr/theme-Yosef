@@ -226,4 +226,4 @@ get_header();
     </div>
 </main>
 
-<?php get_footr() ;?>
+<?php get_footer() ;?>

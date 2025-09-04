@@ -119,7 +119,26 @@ if (document.querySelector(".video-modal")) {
   });
 }
 
-// .........................................................................................................................................разберись с этим
+// при нажатие на первый элемент сайдбара на странице legal-practice откидываем скролл до начала страницы
+document.addEventListener("DOMContentLoaded", function () {
+  const menuLinks = document.querySelectorAll(
+    ".sidebar-legal-practice__list li a"
+  );
+
+  if (menuLinks.length > 0) {
+    // Первая ссылка — скролл наверх
+    menuLinks[0].addEventListener("click", function (e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+
+    // Остальные ссылки можно оставить стандартными, если они ведут к якорям
+  }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   // Инициализация GSAP ScrollTrigger
   gsap.registerPlugin(ScrollTrigger);

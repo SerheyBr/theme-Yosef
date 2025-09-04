@@ -1,26 +1,15 @@
-<div class="judgments-post" id="post-landmark-@@id">
+<div class="judgments-post">
   <div class="judgments-post__title-box">
-    <h3 class="judgments-post__title-top">ינואר 2025</h3>
-    <h3 class="judgments-post__title-bottom">
-      רומן שגל נגד מדינת ישראל עפ"ג 31852-10-2
-    </h3>
+    <p class="judgments-post__title-date"><?php the_field('post_judgment_date') ;?></p>
+    <p class="judgments-post__title-bottom"><?php the_field('post_judgment_title') ;?></p>
+    <p><?php the_field('post_judgment_sn') ;?></p>
   </div>
   <div class="judgments-post__content">
     <div class="judgments-post__text judgments-post__text--excert">
-      <p>
-        <b
-          >ערעור על גזר דינו של בית המשפט המחוזי בחיפה ב-ת"פ 44729-04-24 מיום
-          1.10.2024 שניתן על ידי השופטת א' אימבר.</b
-        >
-      </p>
-      <p>
-        מתוך הפסיקה: “דין הערעור להידחות. ככלל, ערכאת הערעור לא תתערב בעונש
-        שגזרה הערכאה הדיונית, אלא במקרים שבהם ניכרת חריגה קיצונית ממדיניות
-        הענישה הנוהגת במקרים דומים, או כאשר נפלה על פני הדברים טעות מהותית
-        ובולטת בגזר הדין...”
-      </p>
+      <p><b>  <?php the_title();?></b></p>
+      <?php the_content();?>
     </div>
-    <button class="judgments-post__btn">
+    <a href='<?php the_field('post_judgment_link') ;?>' class="judgments-post__btn" target="_blank" >
       <p>למסמך המלא / הורדה</p>
       <svg
         width="16"
@@ -37,6 +26,6 @@
           stroke-linecap="round"
         />
       </svg>
-    </button>
+    </a>
   </div>
 </div>
