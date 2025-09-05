@@ -107,6 +107,11 @@ if (document.querySelector(".video-modal")) {
       modalVideo.classList.remove("active");
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
+
+      const iframe = modalVideo.querySelector("iframe");
+      if (iframe) {
+        iframe.src = iframe.src;
+      }
     }
   });
 
@@ -115,6 +120,11 @@ if (document.querySelector(".video-modal")) {
       modalVideo.classList.remove("active");
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
+
+      const iframe = modalVideo.querySelector("iframe");
+      if (iframe) {
+        iframe.src = iframe.src;
+      }
     }
   });
 }

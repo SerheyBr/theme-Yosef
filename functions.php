@@ -32,7 +32,10 @@ add_action('after_setup_theme', function () {
     ]);
 });
 
-// создаем кастомные посты:
+// добавляем картинки!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+add_theme_support('post-thumbnails');
+
+// создаем кастомные посты!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 function register_post_judgments() {
     register_post_type('post_judgment', [
@@ -77,8 +80,51 @@ function register_post_landmarks() {
 }
 add_action( 'init', 'register_post_landmarks' );
 
-// Обработчик AJAX
-function my_ajax_load_posts() {
+function register_post_articles() {
+    register_post_type('post_articles', [
+        'labels' => [
+            'name' => 'articles',
+            'singular_name' => 'article',
+        ],
+        'public' => true,
+        'has_archive' => true,
+        'show_in_rest' => true, // для Gutenberg
+        'supports' => ['title', 'editor', 'thumbnail'],
+    ]);
+}
+add_action( 'init', 'register_post_articles' );
+
+function register_post_lectures() {
+    register_post_type('post_lectures', [
+        'labels' => [
+            'name' => 'lectures',
+            'singular_name' => 'lecture',
+        ],
+        'public' => true,
+        'taxonomies' => ['lectures_tags'],
+        'has_archive' => true,
+        'show_in_rest' => true, // для Gutenberg
+        'supports' => ['title', 'editor', 'thumbnail'],
+    ]);
+}
+
+function create_lectures_taxonomy() {
+    register_taxonomy('lectures_tags', 'post_lectures', [
+        'labels' => [
+            'name' => 'lectures tags',
+            'singular_name' => 'lecture tag',
+        ],
+        'public' => true,
+        'hierarchical' => false, // true — как категории, false — как теги
+        'show_in_rest' => true, // для Gutenberg
+    ]);
+}
+
+add_action( 'init', 'register_post_lectures' );
+add_action('init', 'create_lectures_taxonomy');
+// Обработчики AJAX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// ajax обработчик для judgments
+function my_ajax_load_posts_judgments() {
     $tag_id = intval($_POST['tag_id'] ?? 0);
 
      $query = new WP_Query([
@@ -122,6 +168,53 @@ function my_ajax_load_posts() {
  
     wp_die(); 
 }
-add_action('wp_ajax_my_ajax_load_posts', 'my_ajax_load_posts');
-add_action('wp_ajax_nopriv_my_ajax_load_posts', 'my_ajax_load_posts');
+add_action('wp_ajax_my_ajax_load_posts', 'my_ajax_load_posts_judgments');
+add_action('wp_ajax_nopriv_my_ajax_load_posts', 'my_ajax_load_posts_judgments');
+
+function my_ajax_load_posts_lectures() {
+    $tag_id = intval($_POST['tag_id'] ?? 0);
+
+     $query = new WP_Query([
+        'post_type' => 'post_lectures',
+        'posts_per_page' => -1,
+        'meta_key'       => 'lectures_order',
+        'orderby'        => [
+            'meta_value_num' => 'ASC',
+            'date'           => 'DESC'
+        ],
+    ]);
+
+    if($tag_id > 0){
+        $query = new WP_Query([
+            'post_type' => 'post_lectures',
+            'posts_per_page' => -1,
+            'meta_key'       => 'lectures_order',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'lectures_tags',
+                    'field'    => 'term_id',
+                    'terms'    => $tag_id 
+                )
+            ),
+            'orderby' => [
+                'meta_value_num' => 'ASC',
+                'date'           => 'DESC'
+            ],
+        ]);
+    }
+    
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            get_template_part('template-parts/posts/post-lectures');
+        }
+    } else {
+        echo '<p>Нет постов</p>';
+    }
+ 
+    wp_die(); 
+}
+add_action('wp_ajax_my_ajax_load_posts_lectures', 'my_ajax_load_posts_lectures');
+add_action('wp_ajax_nopriv_my_ajax_load_posts_lectures', 'my_ajax_load_posts_lectures');
 ?>

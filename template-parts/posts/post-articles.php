@@ -1,32 +1,29 @@
-<div class="articles-post" id="post-landmark-@@id">
+
+<?php
+  $image_url = get_the_post_thumbnail_url(get_the_ID(), 'card-thumb');
+  $alt = get_the_title(); // можно подтянуть заголовок как alt
+?>
+
+
+<div class="articles-post">
   <img
-    src="assets/images/articles-img.png"
-    alt="img"
+    src="<?php echo esc_url($image_url) ;?>"
+    alt="<?php echo esc_attr($alt); ?>"
     width="300"
     height="165"
     class="articles-post__img"
   />
+
   <div class="articles-post__content">
-    <h4 class="articles-post__title">השופט החוקר על-פי חוק חקירת סיבות מוות</h4>
-    <p class="articles-post__subtitle">התשי"ח - 1958</p>
+    <h4 class="articles-post__title"> <?php the_title() ;?></h4>
+    <p class="articles-post__subtitle"> <?php the_field('articles_date') ;?></p>
     <div class="articles-post__text articles-post__text--excert">
-      <p>
-        ספר שמגר – מאמרים חלק ב', ההוצאה לאור של לשכת עורכי הדין (התשס"ג-2003).
-      </p>
-      <p>
-        במאמר זה סקר את פסיקות בתי המשפט ביחס להליך חקירת סיבת מוות על ידי שופט,
-        ועמד על השימוש הגובר בהליך זה ועל יישומו של החוק בפועל.
-      </p>
+      <?php the_field('articles_date_intro') ;?>
     </div>
-    <div class="articles-post__text show-full-text">
-      <p>text more</p>
-      <p>
-        בלורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית. סת אלמנקום ניסי
-        נון ניבאה. דס איאקוליס וולופטה דיאם. וסטיבולום אט דולור, קראס אגת לקטוס
-        וואל אאוגו במר מודוף. אודיפו בלאסטיק מונופץ קליר...
-      </p>
-    </div>
-    <button class="articles-post__btn button-show-more">
+    <a
+      href="<?php the_permalink(); ?>"
+      class="articles-post__btn button-show-more"
+    >
       <p>קרא עוד</p>
       <svg
         width="12"
@@ -40,6 +37,6 @@
           fill="#0E7BCD"
         />
       </svg>
-    </button>
+    </a>
   </div>
 </div>
