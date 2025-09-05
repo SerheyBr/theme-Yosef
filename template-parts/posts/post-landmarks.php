@@ -1,26 +1,20 @@
 <div class="landmarks-post" id="post-landmark-@@id">
   <div class="landmarks-post__title-box">
-    <h3 class="landmarks-post__title-top">ספטמבר 1994</h3>
-    <h3 class="landmarks-post__title-bottom">חקירת סיבת המוות</h3>
+    <h3 class="landmarks-post__title-top"><?php the_field('landmarks_post_date') ;?></h3>
+    <h3 class="landmarks-post__title-bottom"><?php the_title() ;?></h3>
   </div>
   <div class="landmarks-post__content">
     <div class="landmarks-post__text landmarks-post__text--excert">
       <p>
-        בלורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית. סת אלמנקום ניסי
-        נון ניבאה. דס איאקוליס וולופטה דיאם. וסטיבולום אט דולור, קראס אגת לקטוס
-        וואל אאוגו במר מודוף. אודיפו בלאסטיק מונופץ קליר...
+        <?php the_field('landmarks_post_intro') ;?>
       </p>
     </div>
     <div class="landmarks-post__text show-full-text">
-      <p>text more</p>
-      <p>
-        בלורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית. סת אלמנקום ניסי
-        נון ניבאה. דס איאקוליס וולופטה דיאם. וסטיבולום אט דולור, קראס אגת לקטוס
-        וואל אאוגו במר מודוף. אודיפו בלאסטיק מונופץ קליר...
-      </p>
+      <?php the_content() ;?>
     </div>
     <button class="landmarks-post__btn button-show-more">
-      <p>קרא עוד</p>
+      <p dir="rtl" class="btn-visible">סגור</p>
+      <p dir="rtl" class="btn-hidden">קרא עוד</p>
       <svg
         width="12"
         height="10"

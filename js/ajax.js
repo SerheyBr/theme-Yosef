@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
     tagButtons.forEach((btn) => {
       btn.disabled = true;
     });
-    postsContainer.innerHTML = "<div>Загрузка постов...</div>";
+    postsContainer.innerHTML =
+      "<div class='loading'><img src='https://i.gifer.com/ZZ5H.gif' alt=''></div>";
     const formData = new FormData();
     formData.append("action", "my_ajax_load_posts");
     formData.append("tag_id", tagID);

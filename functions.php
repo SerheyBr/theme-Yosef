@@ -33,89 +33,6 @@ add_action('after_setup_theme', function () {
 });
 
 // создаем кастомные посты:
-// function register_post_landmarks(){
-// 	register_post_type( 'post_landmarks', [
-// 		'labels' => [
-// 			'name'               => 'landmarks', // основное название для типа записи
-// 			'singular_name'      => 'landmarks', // название для одной записи этого типа
-// 		],
-// 		'public'                 => true,
-// 		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
-// 		'rest_base'           => null, // $post_type. C WP 4.7
-// 		'menu_position'       => 4,
-// 		'menu_icon'           => null,
-
-// 		'hierarchical'        => false,
-// 		'supports'            => [ 'title', 'editor' ], 
-// 		'taxonomies'          => [''],
-// 		'has_archive'         => false,
-// 		'rewrite'             => true,
-// 		'query_var'           => true,
-// 	] );
-// }
-
-// function register_post_articles(){
-// 	register_post_type( 'post_articles', [
-// 		'labels' => [
-// 			'name'               => 'articles', // основное название для типа записи
-// 			'singular_name'      => 'articles', // название для одной записи этого типа
-// 		],
-// 		'public'                 => true,
-// 		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
-// 		'rest_base'           => null, // $post_type. C WP 4.7
-// 		'menu_position'       => 4,
-// 		'menu_icon'           => null,
-
-// 		'hierarchical'        => false,
-// 		'supports'            => [ 'title', 'editor' ], 
-// 		'taxonomies'          => [''],
-// 		'has_archive'         => false,
-// 		'rewrite'             => true,
-// 		'query_var'           => true,
-// 	] );
-// }
-
-// function register_post_lectures(){
-// 	register_post_type( 'post_lectures', [
-// 		'labels' => [
-// 			'name'               => 'lectures', // основное название для типа записи
-// 			'singular_name'      => 'lectures', // название для одной записи этого типа
-// 		],
-// 		'public'                 => true,
-// 		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
-// 		'rest_base'           => null, // $post_type. C WP 4.7
-// 		'menu_position'       => 4,
-// 		'menu_icon'           => null,
-
-// 		'hierarchical'        => false,
-// 		'supports'            => [ 'title', 'editor' ], 
-// 		'taxonomies'          => [''],
-// 		'has_archive'         => false,
-// 		'rewrite'             => true,
-// 		'query_var'           => true,
-// 	] );
-// }
-
-// function register_post_judgments(){
-// 	register_post_type( 'post_judgment', [
-// 		'labels' => [
-// 			'name'               => 'judgments', // основное название для типа записи
-// 			'singular_name'      => 'judgment', // название для одной записи этого типа
-// 		],
-// 		'public'                 => true,
-// 		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
-// 		'rest_base'           => null, // $post_type. C WP 4.7
-// 		'menu_position'       => 4,
-// 		'menu_icon'           => null,
-
-// 		'hierarchical'        => false,
-// 		'supports'            => [ 'title', 'editor' ], 
-// 		'taxonomies'          => [''],
-// 		'has_archive'         => false,
-// 		'rewrite'             => true,
-// 		'query_var'           => true,
-// 	] );
-// }
 
 function register_post_judgments() {
     register_post_type('post_judgment', [
@@ -145,9 +62,20 @@ function create_judgment_taxonomy() {
 
 add_action( 'init', 'register_post_judgments' );
 add_action('init', 'create_judgment_taxonomy');
-// add_action( 'init', 'register_post_landmarks' );
-// add_action( 'init', 'register_post_articles' );
-// add_action( 'init', 'register_post_lectures' );
+
+function register_post_landmarks() {
+    register_post_type('post_landmarks', [
+        'labels' => [
+            'name' => 'landmarks',
+            'singular_name' => 'landmark',
+        ],
+        'public' => true,
+        'has_archive' => true,
+        'show_in_rest' => true, // для Gutenberg
+        'supports' => ['title', 'editor'],
+    ]);
+}
+add_action( 'init', 'register_post_landmarks' );
 
 // Обработчик AJAX
 function my_ajax_load_posts() {
