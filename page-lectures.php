@@ -584,6 +584,108 @@ get_header();
                     </div>
                 </div> -->
             </div>
+
+
+            <div class="video-modal">
+                <div class="container">
+                    <div class="video-modal__wrapper">
+                        <div class="video-modal__content">
+                            <button class="video-modal__btn-close">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11 5L8 8M8 8L5 11M8 8L5 5M8 8L11 11M1 1H15V15H1V1Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                סגירה
+                            </button>
+                            <iframe
+                            id='main-video'
+                            width="560"
+                            height="315"
+                            src=""
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                            ></iframe>
+                            <p class="video-modal__title">
+                            הרצאתו של שופט בית המשפט העליון יוסף אלרון, בטקס
+                            בוגרי ובוגרות ומוסמכי ומוסמכות מחזור 2022 של הפקולטה
+                            למשפטים באוניברסיטת חיפה, שהתקיים ביום שני,
+                            17.7.2023, בשעה 18:00.
+                            </p>
+                        </div>
+                        <div class="video-modal__left-column">
+                            <p class="video-modal__left-column-title">
+                            הרצאות נוספות
+                            </p>
+                            <div class="video-modal__more-videos">  
+
+
+
+                            <?php if ($query->have_posts()) : ?>
+                                <?php while ($query->have_posts()) : $query->the_post(); ?>
+                                    <?php
+                                        $image_url = get_the_post_thumbnail_url(get_the_ID(), 'card-thumb');
+                                        $alt = get_the_title(); // можно подтянуть заголовок как alt
+                                    ?>
+                                    <div class="additional-video" data-video="<?php the_field('lectures_video'); ?>">
+                                        <a href="#" class='lectures-post-link' ></a>
+                                        <img
+                                        src="<?php echo esc_url($image_url) ;?>"
+                                        alt="<?php echo esc_attr($alt); ?>"
+                                        class="additional-video__img"
+                                        />
+                                        <p class="additional-video__title"><?php the_field('lectures_date');?> </p>
+                                        <p class="additional-video__subtitle">
+                                        <?php the_title();?>
+                                        </p>
+                                    </div>
+                                <?php endwhile; ?>
+                                <?php wp_reset_postdata(); ?>
+                            <?php endif; ?>
+
+                                <!-- <div class="additional-video">
+                                        <img
+                                        src="assets/images/lectures-img.png"
+                                        alt="video"
+                                        class="additional-video__img"
+                                        />
+                                        <p class="additional-video__title">ספטמבר 2019</p>
+                                        <p class="additional-video__subtitle">
+                                        המכללה למנהל – המסלול האקדמי
+                                        </p>
+                                </div>
+                            
+                                <div class="additional-video">
+                                    <img
+                                    src="assets/images/lectures-img.png"
+                                    alt="video"
+                                    class="additional-video__img"
+                                    />
+                                    <p class="additional-video__title">ספטמבר 2019</p>
+                                    <p class="additional-video__subtitle">
+                                    המכללה למנהל – המסלול האקדמי
+                                    </p>
+                                </div>
+
+                                <div class="additional-video">
+                                    <img
+                                    src="assets/images/lectures-img.png"
+                                    alt="video"
+                                    class="additional-video__img"
+                                    />
+                                    <p class="additional-video__title">ספטמבר 2019</p>
+                                    <p class="additional-video__subtitle">
+                                    המכללה למנהל – המסלול האקדמי
+                                    </p>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+
         </div>
         </div>
         <div class="layout__sidebar">

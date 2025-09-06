@@ -1,4 +1,5 @@
 <?php
+// подключаем стили и скрипты=====================================]
 function mytheme_scripts() {
     // Подключаем стили
       wp_enqueue_style('fonts', 'https://fonts.googleapis.com');
@@ -6,6 +7,7 @@ function mytheme_scripts() {
       wp_enqueue_style('fonts-googleapis', 'https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wdth,wght@75,100..900&display=swap');
       wp_enqueue_style('fonts-googleapis2', 'https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wdth,wght@87.5,100..900&display=swap');
       wp_enqueue_style('main-css', get_stylesheet_directory_uri() . '/css/style.css');
+      wp_enqueue_style('wp-css', get_stylesheet_directory_uri() . '/css/style-wp.css');
 
     // Подключаем скрипты (jquery уже встроен в WP)
       wp_enqueue_script('ajax-js', get_stylesheet_directory_uri() . '/js/ajax.js', array(), '1.0', true);
@@ -13,14 +15,14 @@ function mytheme_scripts() {
       wp_enqueue_script('scrollTrigger', get_stylesheet_directory_uri() . '/assets/libs/gsap/ScrollTrigger.min.js', array(), '1.0', true);
       wp_enqueue_script('main-js', get_stylesheet_directory_uri() . '/js/main.js', array(), '1.0', true);
 
-
+// прокоментируй эту строку===========================================]
       wp_localize_script( 'ajax-js', 'my_ajax', array('ajax_url' => admin_url('admin-ajax.php')) );
 
 }
 add_action('wp_enqueue_scripts', 'mytheme_scripts');
 
 
-// // добавление меню навигации
+// // добавление меню навигации=====================================]
 add_action('after_setup_theme', function () {
     add_theme_support('menus');
 
@@ -32,10 +34,10 @@ add_action('after_setup_theme', function () {
     ]);
 });
 
-// добавляем картинки!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// добавляем картинки===============================================]
 add_theme_support('post-thumbnails');
 
-// создаем кастомные посты!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// создаем кастомные посты==========================================]
 
 function register_post_judgments() {
     register_post_type('post_judgment', [
@@ -122,8 +124,15 @@ function create_lectures_taxonomy() {
 
 add_action( 'init', 'register_post_lectures' );
 add_action('init', 'create_lectures_taxonomy');
-// Обработчики AJAX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// ajax обработчик для judgments
+
+// хлебные крошки==============================================]
+
+function bk(){
+    echo '<span>123</span>';
+}
+
+// Обработчики AJAX============================================]
+// ajax обработчик для judgments===============================]
 function my_ajax_load_posts_judgments() {
     $tag_id = intval($_POST['tag_id'] ?? 0);
 
