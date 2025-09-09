@@ -125,12 +125,67 @@ function create_lectures_taxonomy() {
 add_action( 'init', 'register_post_lectures' );
 add_action('init', 'create_lectures_taxonomy');
 
+function register_post_news() {
+    register_post_type('post_news', [
+        'labels' => [
+            'name' => 'news',
+            'singular_name' => 'news',
+        ],
+        'public' => true,
+        'has_archive' => true,
+        'show_in_rest' => true, // для Gutenberg
+        'supports' => ['title', 'editor', 'thumbnail'],
+    ]);
+}
+add_action( 'init', 'register_post_news' );
+
 // хлебные крошки==============================================]
 
-function bk(){
-    echo '<span>123</span>';
+function my_breadcrumbs() {
+
+    echo '<ul class="breadcrumbs">';
+    echo '<li><a href="'.home_url().'">דף הבית </a></li>';
+    echo '<li>';
+    echo '<svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg" > <path d="M7 7L3 10.5L7 14" stroke="#032169" stroke-linecap="round" stroke-linejoin="round" /></svg>';
+    echo '</li>';
+
+    
+    if(is_page()){
+        global $post;
+        $slug = $post->post_name;
+
+        $translete = [
+            'legal-practice' => 'עשייה משפטית',
+            'landmarks-page' => 'ציוני דרך',
+            'judgments-page' => 'משפט מנהלי',
+            'articles-page' => 'מאמרים',
+            'lectures-speeches-page' => 'הרצאות ונאומים',
+            'contacts-page' => 'יצירת קשר',
+            'book-page' => 'book page',
+            'news-page' => 'כתבות',
+        ];
+        
+        if(!empty($translete[$slug])){
+            $page_title = $translete[$slug];
+        }
+    }
+
+    if(is_search()){
+         $page_title = 'חיפוש';
+    }
+
+    echo '<li>'.$page_title.'</li>';
+    echo '</ul>';
 }
 
+// меняем параметры цикла для поиска==============================]
+function my_search_filter( $query ) {
+    // Только фронтенд и основной запрос
+    if ( $query->is_search() && $query->is_main_query() && !is_admin() ) {
+        $query->set( 'post_type', [ 'post_news', 'post_lectures', 'post_judgment', 'post_landmarks', 'post_articles' ] );
+    }
+}
+add_action( 'pre_get_posts', 'my_search_filter' );
 // Обработчики AJAX============================================]
 // ajax обработчик для judgments===============================]
 function my_ajax_load_posts_judgments() {

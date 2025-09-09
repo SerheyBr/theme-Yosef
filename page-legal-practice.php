@@ -9,28 +9,11 @@ get_header();
     <div class="container">
     <div class="layout__wrapper">
         <div class="layout__content">
-        <div class="layout__breadcrumbs">
-            <ul class="breadcrumbs">
-            <li><a href="#">דף הבית</a></li>
-            <li>
-                <svg
-                width="10"
-                height="19"
-                viewBox="0 0 10 19"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                >
-                <path
-                    d="M7 7L3 10.5L7 14"
-                    stroke="#032169"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-                </svg>
-            </li>
-            <li><a href="#">עשייה משפטית</a></li>
-            </ul>
-        </div>
+        <!-- <div class="layout__breadcrumbs"> -->
+            <?php
+            //  my_breadcrumbs();
+             ?>
+        <!-- </div> -->
         <div class="legal-practice">
             <h2 class="legal-practice__title title-section"><?php echo the_field('title_lp'); ?></h2>
             <div class="legal-practice__posts">

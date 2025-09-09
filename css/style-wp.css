@@ -9,3 +9,75 @@
   height: 100%;
   cursor: pointer;
 }
+.book__item {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e6e6e6;
+  margin-bottom: 15px;
+}
+.my-form {
+  margin-left: auto;
+}
+.my-form input {
+  direction: rtl !important;
+}
+.my-form input,
+.my-form textarea {
+  direction: rtl !important;
+}
+
+/* Подписи тоже вправо */
+.my-form label {
+  display: block;
+}
+
+/* Кнопка отправки */
+.my-form .wpcf7-submit {
+  border: none;
+  border-radius: 10px;
+  background: #d1cdce;
+  font-size: 20px;
+}
+.wpcf7 input[type="url"],
+.wpcf7 input[type="email"],
+.wpcf7 input[type="tel"] {
+  direction: rtl !important;
+}
+
+.my-form .my-form__footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+mark {
+  background: none;
+  color: #0e7bcd;
+}
+.lectures-post__btn {
+  gap: 0px;
+}
+
+.sidebar-featured-topics__book {
+  display: block;
+  background: #e6e6e6;
+  border-radius: 10px;
+  padding: 15px 30px;
+  position: relative;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  text-align: justify;
+  color: #000;
+  max-height: 166px;
+}
+
+.sidebar-featured-topics__book img {
+  transform: translateY(33px) scale(1.2);
+}
+.page-title {
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 120%;
+  text-align: justify;
+  color: #032169;
+  margin-bottom: 20px;
+}

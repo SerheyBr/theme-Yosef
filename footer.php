@@ -10,12 +10,6 @@
         </div>
       </div>
     </footer>
-
-    <!-- <script src="assets/libs/slim-select/slimselect.min.js"></script>
-    <script src="assets/libs/swiper/swiper-bundle.min.js"></script> -->
-    <!-- <script src="assets/libs/gsap/gsap.min.js"></script>
-    <script src="assets/libs/gsap/ScrollTrigger.min.js"></script>
-    <script src="js/main.js"></script> -->
     <?php wp_footer(); ?>
   </body>
 </html>

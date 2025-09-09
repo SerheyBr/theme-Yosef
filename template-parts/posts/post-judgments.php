@@ -11,7 +11,7 @@
     </div>
     <a href='<?php the_field('post_judgment_link') ;?>' class="judgments-post__btn" target="_blank" >
       <p>למסמך המלא / הורדה</p>
-      <svg
+      <!-- <svg
         width="16"
         height="16"
         viewBox="0 0 16 16"
@@ -25,7 +25,9 @@
           stroke-miterlimit="3.8637"
           stroke-linecap="round"
         />
-      </svg>
+      </svg> -->
+      &#160;
+      &#62;
     </a>
   </div>
 </div>

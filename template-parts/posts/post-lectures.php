@@ -28,7 +28,7 @@
     </div>
     <button class="lectures-post__btn open-modal-video">
         <p>לצפייה</p>
-        <svg
+        <!-- <svg
         width="6"
         height="11"
         viewBox="0 0 6 11"
@@ -42,7 +42,10 @@
             stroke-miterlimit="3.8637"
             stroke-linecap="round"
         />
-        </svg>
+        </svg> -->
+        &#160;
+        &#62;
+         
     </button>
     </div>
 </div>
