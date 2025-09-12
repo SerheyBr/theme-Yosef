@@ -96,3 +96,143 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+// ajax запрос для всплавающего меню при поиске
+// document.addEventListener("DOMContentLoaded", function () {
+//   const input = document.querySelector(".search");
+//   const suggestions = document.querySelector(".header__search-body");
+//   let timer;
+
+//   input.addEventListener("input", function () {
+//     const query = input.value.trim();
+
+//     // если меньше 2 символов, скрываем меню
+//     if (query.length < 2) {
+//       suggestions.style.display = "none";
+//       return;
+//     }
+
+//     // debounce, чтобы не слать запрос на каждый символ
+//     clearTimeout(timer);
+//     timer = setTimeout(function () {
+//       const data = new FormData();
+//       data.append("action", "live_search");
+//       data.append("s", query);
+
+//       fetch(my_ajax.ajax_url, {
+//         method: "POST",
+//         body: data,
+//       })
+//         .then((response) => response.json())
+//         .then((results) => {
+//           suggestions.innerHTML = "";
+
+//           if (results.length > 0) {
+//             results.forEach((item) => {
+//               const div = document.createElement("li");
+//               const a = document.createElement("a");
+//               a.href = item.permalink;
+//               a.textContent = item.title;
+//               console.log(item);
+//               div.appendChild(a);
+//               suggestions.appendChild(div);
+//             });
+//             suggestions.style.display = "block";
+//           } else {
+//             suggestions.style.display = "none";
+//           }
+//         })
+//         .catch((err) => {
+//           console.error(err);
+//           suggestions.style.display = "none";
+//         });
+//     }, 300); // 300мс задержка
+//   });
+
+//   // закрываем меню при клике вне поля
+//   document.addEventListener("click", function (e) {
+//     if (!input.contains(e.target) && !suggestions.contains(e.target)) {
+//       suggestions.style.display = "none";
+//     }
+//   });
+// });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const input = document.querySelector(".search");
+  const suggestions = document.querySelector(".header__search-body");
+  let timer;
+
+  // функция для экранирования спецсимволов RegExp
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  input.addEventListener("input", function () {
+    const query = input.value.trim();
+
+    // если меньше 2 символов, скрываем меню
+    if (query.length < 2) {
+      suggestions.style.display = "none";
+      return;
+    }
+
+    // debounce, чтобы не слать запрос на каждый символ
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      const data = new FormData();
+      data.append("action", "live_search");
+      data.append("s", query);
+
+      fetch(my_ajax.ajax_url, {
+        method: "POST",
+        body: data,
+      })
+        .then((response) => response.json())
+        .then((results) => {
+          suggestions.innerHTML = "";
+
+          if (results.length > 0) {
+            results.forEach((item) => {
+              const div = document.createElement("li");
+              // const a = document.createElement("a");
+              // a.href = item.permalink;
+
+              const regex = new RegExp(`(${escapeRegExp(query)})`, "gi");
+              // a.innerHTML = item.title.replace(
+              //   regex,
+              //   '<span class="highlight">$1</span>'
+              // );
+
+              // div.appendChild(a);
+              const form = document.querySelector(".header__search"); // форма поиска
+              div.innerHTML = item.title.replace(
+                regex,
+                '<span class="highlight">$1</span>'
+              );
+              suggestions.appendChild(div);
+
+              div.addEventListener("click", function () {
+                input.value = item.title; // ставим выбранное слово в поле поиска
+                suggestions.style.display = "none"; // скрываем подсказки
+                form.submit(); // отправляем форму на страницу поиска
+              });
+            });
+            suggestions.style.display = "block";
+          } else {
+            suggestions.style.display = "none";
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          suggestions.style.display = "none";
+        });
+    }, 100); // 300мс задержка
+  });
+
+  // закрываем меню при клике вне поля
+  document.addEventListener("click", function (e) {
+    if (!input.contains(e.target) && !suggestions.contains(e.target)) {
+      suggestions.style.display = "none";
+    }
+  });
+});

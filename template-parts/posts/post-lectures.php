@@ -6,26 +6,28 @@
     ?>
 
     <img
-    src="<?php echo esc_url($image_url) ;?>"
-    alt="<?php echo esc_attr($alt); ?>"
-    width="300"
-    height="165"
-    class="lectures-post__img"
+        src="<?php echo esc_url($image_url) ;?>"
+        alt="<?php echo esc_attr($alt); ?>"
+        width="300"
+        height="165"
+        class="lectures-post__img"
     />
     <div class="lectures-post__content">
-    <h4 class="lectures-post__title">
-     <?php the_title();?>
-    </h4>
-    <p class="lectures-post__subtitle">
-        <?php the_field('lectures_date');?>    
-    </p>
-    <div
-        class="lectures-post__text lectures-post__text--excert"
-    >
-        <p>
-            <?php the_field('lectures_intro');?>
-        </p>
-    </div>
+        <div class="lectures-post__content-wrapper">
+            <h4 class="lectures-post__title">
+            <?php the_title();?>
+            </h4>
+            <p class="lectures-post__subtitle">
+                <?php the_field('lectures_date');?>    
+            </p>
+            <div
+                class="lectures-post__text lectures-post__text--excert"
+            >
+                <p>
+                    <?php the_field('lectures_intro');?>
+                </p>
+            </div>
+        </div>
     <button class="lectures-post__btn open-modal-video">
         <p>לצפייה</p>
         <!-- <svg

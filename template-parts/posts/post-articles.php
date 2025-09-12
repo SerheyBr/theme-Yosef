@@ -15,10 +15,12 @@
   />
 
   <div class="articles-post__content">
-    <h4 class="articles-post__title"> <?php the_title() ;?></h4>
-    <p class="articles-post__subtitle"> <?php the_field('articles_date') ;?></p>
-    <div class="articles-post__text articles-post__text--excert">
-      <?php the_field('articles_date_intro') ;?>
+    <div class="articles-post__content__wrapper">
+      <h4 class="articles-post__title"> <?php the_title() ;?></h4>
+      <p class="articles-post__subtitle"> <?php the_field('articles_date') ;?></p>
+      <div class="articles-post__text articles-post__text--excert">
+        <?php the_field('articles_date_intro') ;?>
+      </div>
     </div>
     <a
       href="<?php the_permalink(); ?>"

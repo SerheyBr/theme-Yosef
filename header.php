@@ -41,7 +41,7 @@
                   </svg>
                 </button>
                 
-                <input type="search" autocomplete="off" placeholder="חיפוש..." value="<?php echo get_search_query(); ?>" name="s"/>
+                <input class='search' type="search" autocomplete="off" placeholder="חיפוש..." value="<?php echo get_search_query(); ?>" name="s"/>
                 <ul class="header__search-body">
                   <!-- <li><a href="#">קריירה שיפוטית</a></li>
                   <li><a href="#">משפט וחברה</a></li>

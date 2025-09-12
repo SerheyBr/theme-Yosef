@@ -43,170 +43,87 @@ if (document.querySelectorAll(".tags")) {
 // video action for page lectures
 
 // извлекаем id из сыллки на YouTube
-function extractYouTubeId(url) {
-  // Разные форматы YouTube ссылок:
-  // https://www.youtube.com/watch?v=VIDEO_ID
-  // https://youtu.be/VIDEO_ID
-  // https://www.youtube.com/embed/VIDEO_ID
+// function extractYouTubeId(url) {
+//   // Разные форматы YouTube ссылок:
+//   // https://www.youtube.com/watch?v=VIDEO_ID
+//   // https://youtu.be/VIDEO_ID
+//   // https://www.youtube.com/embed/VIDEO_ID
 
-  let videoId = null;
+//   let videoId = null;
 
-  // Для формата youtube.com/watch?v=...
-  if (url.includes("youtube.com/watch?")) {
-    const urlObj = new URL(url);
-    videoId = urlObj.searchParams.get("v");
-  }
-  // Для формата youtu.be/...
-  else if (url.includes("youtu.be/")) {
-    videoId = url.split("youtu.be/")[1];
-    // Убираем возможные параметры после ID
-    if (videoId.includes("?")) {
-      videoId = videoId.split("?")[0];
-    }
-  }
-  // Для формата youtube.com/embed/...
-  else if (url.includes("youtube.com/embed/")) {
-    videoId = url.split("youtube.com/embed/")[1];
-    if (videoId.includes("?")) {
-      videoId = videoId.split("?")[0];
-    }
-  }
-
-  return videoId;
-}
-
-// закрытие открытие модалки и добовление видео
-
-// if (document.querySelectorAll(".lectures-post")) {
-//   const posts = document.querySelectorAll(".lectures-post");
-//   const modalVideo = document.querySelector(".video-modal");
-
-//   posts.forEach((post) => {
-//     const fullUrlVideo = post.dataset.video;
-//     const videoId = extractYouTubeId(fullUrlVideo);
-//     const iframeVideo = post.querySelector("iframe");
-//     const btnOpenModalVideo = post.querySelector(".open-modal-video");
-//     if (videoId) {
-//       iframeVideo.src = `https://www.youtube.com/embed/${videoId}`;
+//   // Для формата youtube.com/watch?v=...
+//   if (url.includes("youtube.com/watch?")) {
+//     const urlObj = new URL(url);
+//     videoId = urlObj.searchParams.get("v");
+//   }
+//   // Для формата youtu.be/...
+//   else if (url.includes("youtu.be/")) {
+//     videoId = url.split("youtu.be/")[1];
+//     // Убираем возможные параметры после ID
+//     if (videoId.includes("?")) {
+//       videoId = videoId.split("?")[0];
 //     }
-//     btnOpenModalVideo.addEventListener("click", (e) => {
-//       if (e.currentTarget) {
-//         modalVideo.classList.add("active");
-//         document.body.style.overflow = "hidden";
-//         document.documentElement.style.overflow = "hidden";
-//       }
-//     });
-//   });
+//   }
+//   // Для формата youtube.com/embed/...
+//   else if (url.includes("youtube.com/embed/")) {
+//     videoId = url.split("youtube.com/embed/")[1];
+//     if (videoId.includes("?")) {
+//       videoId = videoId.split("?")[0];
+//     }
+//   }
+
+//   return videoId;
 // }
 
-// if (document.querySelector(".video-modal")) {
-//   const modalVideo = document.querySelector(".video-modal");
-//   const btnClose = modalVideo.querySelector(".video-modal__btn-close");
-//   modalVideo.addEventListener("click", (e) => {
-//     if (e.target.className === "video-modal active") {
-//       modalVideo.classList.remove("active");
-//       document.body.style.overflow = "";
-//       document.documentElement.style.overflow = "";
-
-//       const iframe = modalVideo.querySelector("iframe");
-//       if (iframe) {
-//         iframe.src = iframe.src;
-//       }
-//     }
-//   });
-
-//   btnClose.addEventListener("click", (e) => {
-//     if (e.currentTarget) {
-//       modalVideo.classList.remove("active");
-//       document.body.style.overflow = "";
-//       document.documentElement.style.overflow = "";
-
-//       const iframe = modalVideo.querySelector("iframe");
-//       if (iframe) {
-//         iframe.src = iframe.src;
-//       }
-//     }
-//   });
-// }
-
-// if (document.querySelector(".video-modal")) {
-//   const modalVideo = document.querySelector(".video-modal");
-//   const btnClose = modalVideo.querySelector(".video-modal__btn-close");
-//   modalVideo.addEventListener("click", (e) => {
-//     if (e.target.className === "video-modal active") {
-//       modalVideo.classList.remove("active");
-//       document.body.style.overflow = "";
-//       document.documentElement.style.overflow = "";
-
-//       const iframe = modalVideo.querySelector("iframe");
-//       if (iframe) {
-//         iframe.src = iframe.src;
-//       }
-//     }
-//   });
-
-//   btnClose.addEventListener("click", (e) => {
-//     if (e.currentTarget) {
-//       modalVideo.classList.remove("active");
-//       document.body.style.overflow = "";
-//       document.documentElement.style.overflow = "";
-
-//       const iframe = modalVideo.querySelector("iframe");
-//       if (iframe) {
-//         iframe.src = iframe.src;
-//       }
-//     }
-//   });
-// }
-// ...........................................................................
 // function convertYoutubeUrl(url) {
 //   return url.replace("watch?v=", "embed/") + "?autoplay=1";
 // }
 
 // document.addEventListener("DOMContentLoaded", () => {
 //   const lecturesPage = document.querySelector(".lectures");
-//   if (lecturesPage) {
-//     const postsLinks = lecturesPage.querySelectorAll(".lectures-post-link");
-//     const modalPopupVideo = lecturesPage.querySelector(".video-modal");
-//     const mainVideo = lecturesPage.querySelector("iframe");
+//   if (!lecturesPage) return;
 
-//     postsLinks.forEach((link) => {
-//       link.addEventListener("click", (e) => {
-//         if (e.currentTarget) {
-//           e.preventDefault();
-//           const url = convertYoutubeUrl(e.currentTarget.dataset.video);
-//           mainVideo.src = url;
-//           modalPopupVideo.classList.add("active");
-//           document.body.style.overflow = "hidden";
-//           document.documentElement.style.overflow = "hidden";
-//         }
-//       });
-//     });
-//   }
+//   const modalPopupVideo = lecturesPage.querySelector(".video-modal");
+//   const mainVideo = lecturesPage.querySelector("#main-video");
+//   const btnClose = lecturesPage.querySelector(".video-modal__btn-close");
 
-//   if (lecturesPage) {
-//     const btnClose = lecturesPage.querySelector(".video-modal__btn-close");
-//     const modalPopupVideo = lecturesPage.querySelector(".video-modal");
+//   // Делегирование клика на все .lectures-post-link
+//   lecturesPage.addEventListener("click", (e) => {
+//     const link = e.target.closest(".lectures-post-link");
+//     if (link) {
+//       e.preventDefault();
+//       const url = convertYoutubeUrl(link.dataset.video);
+//       mainVideo.src = url;
+//       modalPopupVideo.classList.add("active");
+//       document.body.style.overflow = "hidden";
+//       document.documentElement.style.overflow = "hidden";
+//     }
+//   });
 
-//     btnClose.addEventListener("click", (e) => {
-//       const mainVideo = lecturesPage.querySelector("iframe");
-//       modalPopupVideo.classList.remove("active");
-//       document.body.style.overflow = "";
-//       document.documentElement.style.overflow = "";
-//       mainVideo.src = "";
-//     });
-//   }
+//   // Делегирование кликов внутри модалки (смена видео)
+//   modalPopupVideo.addEventListener("click", (e) => {
+//     const related = e.target.closest(".additional-video");
+//     if (related) {
+//       e.preventDefault();
+//       const url = convertYoutubeUrl(related.dataset.video);
+//       mainVideo.src = url;
+//     }
+//   });
+
+//   // Закрытие модалки
+//   btnClose.addEventListener("click", () => {
+//     modalPopupVideo.classList.remove("active");
+//     document.body.style.overflow = "";
+//     document.documentElement.style.overflow = "";
+//     mainVideo.src = ""; // останавливаем видео
+//   });
 // });
-function convertYoutubeUrl(url) {
-  return url.replace("watch?v=", "embed/") + "?autoplay=1";
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   const lecturesPage = document.querySelector(".lectures");
   if (!lecturesPage) return;
 
   const modalPopupVideo = lecturesPage.querySelector(".video-modal");
-  const mainVideo = lecturesPage.querySelector("#main-video");
+  const mainVideo = lecturesPage.querySelector("#main-video"); // это <video>
   const btnClose = lecturesPage.querySelector(".video-modal__btn-close");
 
   // Делегирование клика на все .lectures-post-link
@@ -214,21 +131,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const link = e.target.closest(".lectures-post-link");
     if (link) {
       e.preventDefault();
-      const url = convertYoutubeUrl(link.dataset.video);
-      mainVideo.src = url;
+      const url = link.dataset.video; // прямая ссылка на mp4
+      mainVideo.querySelector("source").src = url;
+      mainVideo.load();
+      mainVideo.play();
+
       modalPopupVideo.classList.add("active");
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
     }
   });
 
-  // Делегирование кликов внутри модалки (смена видео)
+  // Дополнительные видео внутри модалки
   modalPopupVideo.addEventListener("click", (e) => {
     const related = e.target.closest(".additional-video");
     if (related) {
       e.preventDefault();
-      const url = convertYoutubeUrl(related.dataset.video);
-      mainVideo.src = url;
+      const url = related.dataset.video;
+      mainVideo.querySelector("source").src = url;
+      mainVideo.load();
+      mainVideo.play();
     }
   });
 
@@ -237,7 +159,18 @@ document.addEventListener("DOMContentLoaded", () => {
     modalPopupVideo.classList.remove("active");
     document.body.style.overflow = "";
     document.documentElement.style.overflow = "";
-    mainVideo.src = ""; // останавливаем видео
+    mainVideo.pause();
+    mainVideo.currentTime = 0;
+  });
+
+  modalPopupVideo.addEventListener("click", (e) => {
+    if (e.target.classList.contains("active")) {
+      modalPopupVideo.classList.remove("active");
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      mainVideo.pause();
+      mainVideo.currentTime = 0;
+    }
   });
 });
 

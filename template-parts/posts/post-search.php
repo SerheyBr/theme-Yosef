@@ -5,8 +5,10 @@
         $post_type_obj = get_post_type();          
     ?>
 
-    <p><?php echo $post_type_obj;?></p>
+    <p>post type object -><?php echo $post_type_obj;?></p>
     <p><</p>
+    <p>the title -><?php the_title();?></p>
+    <p>the content-><?php the_content() ;?></p>
   </div>
   <p class="search-result__text">
     <!-- לורם איפסום דולור סיט אמט, <span>עברות המתה</span> אדיפיסינג אלית. סת

@@ -81,3 +81,45 @@ mark {
   color: #032169;
   margin-bottom: 20px;
 }
+.layout__sidebar {
+  min-height: auto;
+}
+.footer {
+  margin-top: 0px;
+}
+.sidebar-featured-topics {
+  transform: translateY(-30px);
+}
+.sidebar-featured-topics__book img {
+  transform: translateY(23px) scale(1.2);
+}
+.layout__wrapper {
+  margin-bottom: 20px;
+}
+.landmarks-post__content,
+.judgments-post__content,
+.articles-post__content,
+.lectures-post__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+.search-result__location {
+  display: flex;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #0e7bcd;
+}
+.header__search-body li {
+  cursor: pointer;
+  background-color: #e6e6e6;
+  padding: 6px 25px 6px 0px;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+.header__search-body li:hover {
+  background-color: #d7d7d7;
+}

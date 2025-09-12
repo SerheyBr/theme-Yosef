@@ -179,13 +179,20 @@ function my_breadcrumbs() {
 }
 
 // меняем параметры цикла для поиска==============================]
-function my_search_filter( $query ) {
-    // Только фронтенд и основной запрос
-    if ( $query->is_search() && $query->is_main_query() && !is_admin() ) {
-        $query->set( 'post_type', [ 'post_news', 'post_lectures', 'post_judgment', 'post_landmarks', 'post_articles' ] );
-    }
-}
-add_action( 'pre_get_posts', 'my_search_filter' );
+// function my_search_filter( $query ) {
+//     // Только фронтенд и основной запрос
+//     if ( $query->is_search() && $query->is_main_query() && !is_admin() ) {
+//         $query->set( 'post_type', [ 'post_news', 'post_lectures', 'post_judgment', 'post_landmarks', 'post_articles' ] );
+//     }
+// // показываем все посты в поиске==============================]
+//      if ( $query->is_search() && $query->is_main_query() ) {
+//         $query->set( 'posts_per_page', -1 ); 
+//     }
+// }
+// add_action( 'pre_get_posts', 'my_search_filter' );
+
+
+
 // Обработчики AJAX============================================]
 // ajax обработчик для judgments===============================]
 function my_ajax_load_posts_judgments() {
@@ -235,6 +242,7 @@ function my_ajax_load_posts_judgments() {
 add_action('wp_ajax_my_ajax_load_posts', 'my_ajax_load_posts_judgments');
 add_action('wp_ajax_nopriv_my_ajax_load_posts', 'my_ajax_load_posts_judgments');
 
+// ajax обработчик для lectures===============================]
 function my_ajax_load_posts_lectures() {
     $tag_id = intval($_POST['tag_id'] ?? 0);
 
@@ -281,4 +289,85 @@ function my_ajax_load_posts_lectures() {
 }
 add_action('wp_ajax_my_ajax_load_posts_lectures', 'my_ajax_load_posts_lectures');
 add_action('wp_ajax_nopriv_my_ajax_load_posts_lectures', 'my_ajax_load_posts_lectures');
+
+// ajax обработчик для поиска===============================]
+// function my_live_search(){
+//     $query = isset($_POST['s']) ? sanitize_text_field($_POST['s']) : '';
+
+//     if(empty($query)){
+//         wp_send_json([]);
+//     }
+
+//     // Простейший WP_Query (можно использовать Relevanssi)
+//     $args = [
+//         's' => $query,
+//         'post_type' => ['post_news','post_lectures','post_articles','post_judgment','post_landmarks'], // твои нужные посты
+//         'posts_per_page' => 5
+//     ];
+
+//     $search = new WP_Query($args);
+//     $results = [];
+
+//     if($search->have_posts()){
+//         while($search->have_posts()){
+//             $search->the_post();
+//             $results[] = [
+//                 'title' => html_entity_decode(get_the_title()),
+//                 'permalink' => get_permalink()
+//             ];
+//         }
+//         wp_reset_postdata();
+//     }
+
+//     wp_send_json($results);
+// }
+
+// add_action('wp_ajax_live_search', 'my_live_search');
+// add_action('wp_ajax_nopriv_live_search', 'my_live_search');
+function my_live_search() {
+    $query = isset($_POST['s']) ? sanitize_text_field($_POST['s']) : '';
+
+    if (empty($query)) {
+        wp_send_json([]);
+    }
+
+    // фильтр, чтобы поиск шёл только по заголовку
+    add_filter('posts_search', function($search, $wp_query) use ($query) {
+        global $wpdb;
+        if (empty($query)) return $search;
+
+        // LIKE поиск только по post_title
+        $search = $wpdb->prepare(" AND $wpdb->posts.post_title LIKE %s ", '%' . $wpdb->esc_like($query) . '%');
+        return $search;
+    }, 10, 2);
+
+    $args = [
+        's' => $query,
+        'post_type' => ['post_news','post_lectures','post_articles','post_judgment','post_landmarks'],
+        'posts_per_page' => 5
+    ];
+
+    $search = new WP_Query($args);
+    $results = [];
+
+    if ($search->have_posts()) {
+        while ($search->have_posts()) {
+            $search->the_post();
+            $results[] = [
+                'title' => html_entity_decode(get_the_title()),
+                'permalink' => get_permalink()
+            ];
+        }
+        wp_reset_postdata();
+    }
+
+    // удаляем фильтр после запроса
+    remove_filter('posts_search', '__return_null');
+
+    wp_send_json($results);
+}
+
+add_action('wp_ajax_live_search', 'my_live_search');
+add_action('wp_ajax_nopriv_live_search', 'my_live_search');
+
 ?>
